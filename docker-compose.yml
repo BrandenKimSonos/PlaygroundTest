@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  playground-webserver:
+    container_name: playground-webserver
+    build:
+      context: ./playground-webserver
+      dockerfile: Dockerfile
+    volumes:
+      - './playground-webserver:/app'
+      - '/app/node_modules'
+    ports:
+      - 3001:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  playground-appserver:
+    container_name: playground-appserver
+    build:
+      context: ./playground-appserver/src/appserver
+      dockerfile: Dockerfile
+    volumes:
+      - './plaground-appserver:/src/src'
+    ports:
+      - 4001:4000

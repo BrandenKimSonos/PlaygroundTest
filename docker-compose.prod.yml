@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  playground-webserver-prod:
+    container_name: playground-webserver-prod
+    build:
+      context: ./playground-webserver
+      dockerfile: Dockerfile.prod
+    ports:
+      - '80:80'

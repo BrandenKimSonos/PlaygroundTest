@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appserver-deployment
+  labels:
+    app: appserver
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: appserver
+  template:
+    metadata:
+      labels:
+        app: appserver
+    spec:
+      containers:
+      - image: services-docker-dev.artifactory.sonos.com/pdsw/services/playground-appserver:prod4
+        name: appserver
+        envFrom:
+          - secretRef:
+              name: appserver
+          - configMapRef:
+              name: appserver-config
+        ports:
+        - containerPort: 8000
